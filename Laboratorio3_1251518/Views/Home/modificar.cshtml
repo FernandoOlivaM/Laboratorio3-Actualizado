@@ -1,0 +1,35 @@
+﻿@using Laboratorio3_1251518.Models
+@model IEnumerable<Medicamentos>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Realizar Modificación</title>
+</head>
+<body>
+    <div>
+        <p><center>Por favor, seleccione el medicamento que desea modificar</center></p>
+        <form name="editar" action="editar" method="post">
+            Medicamento: <select name="medicamento1">
+                @foreach (Medicamentos inventario in Model)
+                {
+                    <option>@inventario.nombre</option>
+                }
+            </select>
+            ¿Que desea hacer con el medicamento? <select name="accion">
+                <option>Eliminar</option>
+                <option>Abastecer</option>
+            </select>
+            <input type="submit" name="facturar" value="Realizar Modificación" />
+        </form>
+    </div>
+    <form action="~/Home/index">
+        <input type="submit" value="Volver" />
+    </form>
+</body>
+</html>

@@ -1,0 +1,100 @@
+﻿@using Laboratorio3_1251518.Models
+@model IEnumerable<Medicamentos>
+@{
+    Layout = null;
+}
+<head>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            background-color: #fff;
+            text-align: center;
+        }
+
+            table th {
+                background-color: #ca0000;
+                color: #fff;
+                font-weight: bold;
+                font-size: 12pt;
+                border: 1px solid #000;
+            }
+
+            table td {
+                background-color: #ffe79f;
+                padding: 5px;
+                border: 1px solid #000;
+            }
+
+            table, table table td {
+                border: 0px solid #000;
+            }
+    </style>
+</head>
+<body>
+
+    @if (Model.Count() > 0)
+    {
+        <h2>Factura: Tu salud en mis manos</h2>
+        <div>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombreCliente)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nit)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.direccion)
+                    </th>
+
+                </tr>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombreCliente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.direccion)
+                    </td>
+
+                </tr>
+                }
+            </table>
+        </div>
+        <h3>Detalle de la compra</h3>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th>&nbsp Producto &nbsp</th>
+                <th>&nbsp Precio Individual &nbsp</th>
+                <th>&nbsp Cantidad &nbsp</th>
+            </tr>
+            @foreach (Medicamentos inventario in Model)
+            {
+                <tr>
+                    <td>@inventario.nombre</td>
+                    <td>@inventario.precio</td>
+                    <td>@inventario.ct</td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td>&nbsp Total a pagar &nbsp</td>
+                    <td>$ @inventario.total</td>
+                </tr>
+            }
+        </table>
+    }
+</body>
+<form action="~/Home/index">
+    <input type="submit" value="Volver" />
+</form>

@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Mostrar Inventario</title>
     <style type="text/css">
         body {
             font-family: Arial;
@@ -44,26 +44,34 @@
 </head>
 <body>
 
-    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @if (Model.Count() > 0)
     {
-        <p><h2>Por favor, seleccione el archivo</h2></p>
-        <input type="file" name="postedFile" />
-        <input name="cargar" type="submit" value="Cargar" />
-    }
-    @if (Model.Count() > 0) {
-        <p>El Archivo ha sido cargado exitosamente</p>
-        
-        <div>
-            <form action="~/Home/mostrar">
-               <input type="submit" value="Mostrar todo el inventario" />
-            </form>
-            <form action="~/Home/pedir" method="post" aling="right">
-                <input type="submit" value="Realizar pedido" />
-            </form>
-            <form action="~/Home/modificar" method="post" aling="right">
-                <input type="submit" value="Buscar medicamento" />
-            </form>
-        </div>
+        <h2><center>Inventario: Tu salud en mis manos</center></h2>
+        <form action="~/Home/index">
+            <input type="submit" value="Volver" />
+        </form>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Casa Productora</th>
+                <th>Precio</th>
+                <th>Existencia</th>
+            </tr>
+            @foreach (Medicamentos inventario in Model)
+            {
+                <tr>
+                    <td>@inventario.id</td>
+                    <td>@inventario.nombre</td>
+                    <td>@inventario.descripcion</td>
+                    <td>@inventario.casaProductora</td>
+                    <td>@inventario.precio</td>
+                    <td>@inventario.cantidad</td>
+                </tr>
+            }
+        </table>
+
     }
 </body>
 </html>

@@ -1,0 +1,37 @@
+﻿@using Laboratorio3_1251518.Models
+@model IEnumerable<Medicamentos>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Realizar Pedido</title>
+ </head>
+<body>
+    <div>
+        <p><center>Por favor, ingrese los datos para facturación</center></p>
+        <form name="factura" action="facturar" method="post">
+            Nombre:   <input type="text" name="nombre" required />
+            NIT:      <input type="text" name="nit" required />
+            Direción:  <input type="text" name="direccion" /> <br /><br />
+            Producto: <select name="medicamento1">
+                <option> </option>
+                @foreach (Medicamentos inventario in Model)
+                {
+                    <option>@inventario.nombre</option>
+                }
+            </select>
+            Cantidad: <input type="number" value="0" name="cantm1" /><br />
+            <input type="submit" name="facturar" value="Realizar Pedido" />
+        </form>
+    </div>
+
+</body>
+<form action="~/Home/index">
+    <input type="submit" value="Volver" />
+</form>
+</html>
